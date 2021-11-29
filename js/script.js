@@ -17,14 +17,64 @@ testWebP(function (support) {
 });
 // /Webp converter
 
-// Burger menu
+
 $(document).ready(function() {
+	// Burger menu
 	$('.icon-menu').click(function(event) {
 		$('.icon-menu,.menu__body').toggleClass('_active');
 		$('body').toggleClass('_lock');
 	});
+	// /Burger menu
+
+	// Scroll to section
+	$("[data-scroll]").on("click", function(event) {
+		event.preventDefault();
+
+		var $this = $(this),
+			blockId = $this.data('scroll'),
+			blockOffset;
+
+		if(blockId == "#header"){
+			blockOffset = 0;
+		}
+		else {
+			blockOffset = $(blockId).offset().top;
+		}
+
+		$(".header__menu a").removeClass("_active");
+		$this.addClass("_active");
+
+		if($("#nav").hasClass("_active")) {
+			$("#nav_toggle").toggleClass("_active");
+			$("#nav").toggleClass("_active");
+		}
+		$('body').removeClass("_lock");
+
+		$("html, body").animate({
+			scrollTop: blockOffset
+		}, 500);
+	});
+	// /Scroll to section.
+
+	// Slider
+	$('.blog__content').slick({
+		dots: true,
+		adaptiveHeight: true,
+		speed: 700,
+		easing: 'ease',
+	});
+	$('.quotes__content').slick({
+		arrows: false,
+		dots: true,
+		adaptiveHeight: true,
+		variableWidth: true,
+		slidesToShow: 1.5,
+		infinite: false,
+		speed: 700,
+		easing: 'ease',
+	});
+	// /SLider
 });
-// /Burger menu
 
 // Responsive
 $(window).resize(function(event) {
@@ -56,38 +106,6 @@ function adaptive_function () {
 adaptive_function();
 // /Responsive
 
-// Scroll to section
-$(function() {
-	$("[data-scroll]").on("click", function(event) {
-		event.preventDefault();
-
-		var $this = $(this),
-			blockId = $this.data('scroll'),
-			blockOffset;
-
-		if(blockId == "#header"){
-			blockOffset = 0;
-		}
-		else {
-			blockOffset = $(blockId).offset().top;
-		}
-
-		$(".header__menu a").removeClass("_active");
-		$this.addClass("_active");
-
-		if($("#nav").hasClass("_active")) {
-			$("#nav_toggle").toggleClass("_active");
-			$("#nav").toggleClass("_active");
-		}
-		$('body').removeClass("_lock");
-
-		$("html, body").animate({
-			scrollTop: blockOffset
-		}, 500);
-	});
-});
-// /Scroll to section.
-
 // Collapse 
 $("[data-collapse]").on("click", function(event) {
 	event.preventDefault();
@@ -98,29 +116,6 @@ $("[data-collapse]").on("click", function(event) {
 	$this.toggleClass("_active");
 });
 // /Collapse
-
-// Slider
-$(document).ready(function(){
-	$('.blog__content').slick({
-		dots: true,
-		adaptiveHeight: true,
-		speed: 700,
-		easing: 'ease',
-	});
-	$('.quotes__content').slick({
-		arrows: false,
-		dots: true,
-		adaptiveHeight: true,
-		variableWidth: true,
-		slidesToShow: 1.5,
-		infinite: false,
-		speed: 700,
-		easing: 'ease',
-	});
-
-
-});
-// /Slider
 
 // ==========================================================================
 // Scroll active links.
